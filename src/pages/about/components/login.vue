@@ -1,6 +1,6 @@
 <template>
-  <view class="flex flex-col h-screen justify-start items-center bg-gradient-to-b from-blue-100 to-white p-6">
-    <view class="w-full max-w-md">
+
+    <view class="w-full max-w-md ">
       <view class="text-center">
         <!-- 用户信息卡片 -->
         <view class="bg-white p-6 rounded-xl shadow-lg my-4 transform scale-100">
@@ -89,18 +89,22 @@
         </view>
       </view>
     </view>
-  </view>
+  <!-- </view> -->
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-// 模拟用户信息
-const user = ref({
-  isLogged: false,
-  name: '请登陆后使用',
-  avatar: 'https://c-ssl.dtstatic.com/uploads/item/202004/14/20200414210134_qbeyi.thumb.400_0.jpg'
-})
+const storedUser = uni.getStorageSync('userInfo')
+const user = ref(
+  storedUser && storedUser.isLogged !== undefined
+    ? storedUser
+    : { isLogged: false, name: '', avatar: '' }
+)
+
+if (!storedUser || storedUser.isLogged === undefined) {
+  uni.setStorageSync('userInfo', user.value)
+}
 
 // 登录弹出层显示状态
 const showLoginModal = ref(false)
@@ -128,9 +132,15 @@ const handleLogin = async () => {
     })
     if (response.statusCode === 200 && response.data.success) {
       const userData = response.data.data
-      user.value.isLogged = true
-      user.value.name = userData.name
-      user.value.avatar = userData.avatar
+      // user.value.isLogged = true
+      // user.value.name = userData.name
+      // user.value.avatar = userData.avatar
+      uni.setStorageSync('userInfo', {
+        isLogged: true,
+        name: userData.name,
+        avatar: userData.avatar
+      })
+
       uni.showToast({
         title: '登录成功',
         icon: 'success'
@@ -149,6 +159,10 @@ const handleLogin = async () => {
       icon: 'none'
     })
   }
+  //刷新当前页面
+  uni.reLaunch({
+    url: '/pages/about/about'
+  })
 }
 
 // 注册逻辑
@@ -193,5 +207,16 @@ const logout = () => {
     title: '已登出',
     icon: 'none'
   })
+  uni.removeStorageSync('userInfo')
+  uni.reLaunch({
+    url: '/pages/about/about'
+  })
+  // 清除登录状态
+  uni.setStorageSync('userInfo', {
+    isLogged: false,
+    name: '',
+    avatar: ''
+  })
+  // 关闭登录弹出层
 }
 </script>
