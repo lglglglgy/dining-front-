@@ -13,6 +13,19 @@
       "^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue"
     }
   },
+  "subPackages": [
+    {
+      "root": "pages",
+      "pages": [
+        {
+          "path": "about/components/going-orders",
+          "style": {
+            "navigationBarTitleText": "首页"
+          }
+        }
+      ]
+    }
+  ],
   "tabBar": {
     "color": "#999999",
     "selectedColor": "#018d71",
@@ -34,6 +47,12 @@
         "selectedIconPath": "static/tabbar/exampleHL.png",
         "pagePath": "pages/about/about",
         "text": "关于"
+      },
+      {
+        "iconPath": "static/tabbar/example.png",
+        "selectedIconPath": "static/tabbar/exampleHL.png",
+        "pagePath": "pages/info/info",
+        "text": "分流"
       }
     ]
   },
@@ -54,17 +73,12 @@
       }
     },
     {
-      "path": "pages/about/components/history-orders",
+      "path": "pages/info/info",
+      "type": "page",
       "style": {
-        "navigationBarTitleText": "历史订单"
-      }
-    },
-    {
-      "path": "pages/about/components/going-orders",
-      "style": {
-        "navigationBarTitleText": "进行中订单"
+        "navigationBarTitleText": "食堂人流量情况",
+        "navigationStyle": "custom"
       }
     }
-  ],
-  "subPackages": []
+  ]
 }

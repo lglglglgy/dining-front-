@@ -57,14 +57,14 @@ QRCode.toDataURL(qrData, (err, url) => {
 // 历史订单按钮点击事件
 const goToHistoryOrders = () => {
   uni.navigateTo({
-    url: "/pages/about/components/history-orders",
+    url: "/pages/about/components/going-orders",
   });
 };
 
 // 进行中订单按钮点击事件
 const goToOngoingOrders = () => {
   uni.navigateTo({
-    url: '/pages/ongoing-orders/ongoing-orders',
+    url: '/pages/about/components/going-orders',
   });
 };
 

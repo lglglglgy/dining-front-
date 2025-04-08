@@ -16,6 +16,20 @@ export default defineUniPages({
         'z-paging/components/z-paging$1/z-paging$1.vue',
     },
   },
+  subPackages: [
+    {
+      root: 'pages',
+      pages: [
+        {
+
+          path: 'about/components/going-orders',
+          style: {
+            navigationBarTitleText: '首页',
+          },
+        },
+      ],
+    },
+  ],
   tabBar: {
     color: '#999999',
     selectedColor: '#018d71',
@@ -37,6 +51,12 @@ export default defineUniPages({
         selectedIconPath: 'static/tabbar/exampleHL.png',
         pagePath: 'pages/about/about',
         text: '关于',
+      },
+      {
+        iconPath: 'static/tabbar/example.png',
+        selectedIconPath: 'static/tabbar/exampleHL.png',
+        pagePath: 'pages/info/info',
+        text: '分流',
       }
     ],
   },
